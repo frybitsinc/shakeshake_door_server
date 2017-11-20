@@ -11,6 +11,7 @@ RECV_BYTES = 16
 # Create a server socket.
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Binding address.
+#sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 sock.bind((ip_addr, port))
 print('Server is running at {}:{}'.format(ip_addr, port))
 print('Ctrl + C to stop server.\n')

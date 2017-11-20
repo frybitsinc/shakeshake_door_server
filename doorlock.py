@@ -32,9 +32,6 @@ def unlock(right):
         led_num = 23
         # sound
         sound_file = 'sound_button_wrong.mp3'
-        # motor
-        pwm_srt = 12.5
-        pwm_dc = 7.5
         # msg
         msg = msg_wrong
     print(msg)
@@ -45,11 +42,15 @@ def unlock(right):
         os.system("omxplayer -o hdmi {}".format(sound_file))
         # led off
         GPIO.output(led_num, False)
-        # servo motor control
-        pwm.start(pwm_srt)
-        pwm.ChangeDutyCycle(pwm_dc)
-        time.sleep(2)
-        pwm.stop()
+        if right:
+            # servo motor control
+            pwm.start(pwm_srt)
+            pwm.ChangeDutyCycle(pwm_dc+0.5)
+            time.sleep(1)
+            pwm.ChangeDutyCycle(pwm_dc-1)
+            pwm.ChangeDutyCycle(pwm_srt)
+            time.sleep(1)
+            pwm.stop()
     except KeyboardInterrupt:
         GPIO.cleanup()
 
