@@ -39,11 +39,12 @@ def unlock(right):
         msg = msg_wrong
     print(msg)
     try:
-        # led control
+        # led on
         GPIO.output(led_num, True)
-        GPIO.output(led_num, False)
         # sound control
         os.system("omxplayer -o hdmi {}".format(sound_file))
+        # led off
+        GPIO.output(led_num, False)
         # servo motor control
         pwm.start(pwm_srt)
         pwm.ChangeDutyCycle(pwm_dc)
